@@ -1,6 +1,6 @@
 # License
 
-NeuralNetworksAPI (c) 2016 by Bianca Roosa de Mendonça
+NeuralNetworksAPI (c) 2016 by Bianca Rosa de Mendonça
 
 NeuralNetworksAPI is licensed under a
 Creative Commons Attribution 3.0 Unported License.
