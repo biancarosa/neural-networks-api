@@ -3,7 +3,7 @@ from api.helpers.json_response_builder import JSONResponseBuilder
 from api.models import ClassifierNetwork
 from flask import request
 
-@app.route('/classification/predict', methods=['POST'])
+@app.route('/classification/predict', methods=['POST', 'OPTIONS'])
 def classification():
     post_data = request.get_json()
 
