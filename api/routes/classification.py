@@ -10,6 +10,8 @@ def classification():
     if post_data.get('entries'):
         if not post_data.get('network_id'):
             classifier_network = ClassifierNetwork()
+            classifier_network.create()
+            classifier_network.save()
             predictions = classifier_network.predict(post_data['entries'])
             return JSONResponseBuilder.build_response(
                 data={
