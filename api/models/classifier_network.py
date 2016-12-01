@@ -1,11 +1,12 @@
 import pickle
 from sklearn.neural_network import MLPClassifier
-from api import db
+from mongoengine import (
+    Document, BinaryField
+)
 
+class ClassifierNetwork(Document):
 
-class ClassifierNetwork(db.Document):
-
-    pickled = db.BinaryField()
+    pickled = BinaryField()
 
     def create(self):
         self.X = [[0., 0., 0.], [1., 1., 1.]]
