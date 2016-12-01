@@ -8,13 +8,16 @@ def classification():
     post_data = request.get_json()
 
     if post_data.get('entries'):
-        classifier_network = ClassifierNetwork()
-        predictions = classifier_network.predict(post_data['entries'])
-        return JSONResponseBuilder.build_response(
-            data={
-                "output" : predictions
-            }
-        ), 200
+        if not post_data.get('network_id'):
+            classifier_network = ClassifierNetwork()
+            predictions = classifier_network.predict(post_data['entries'])
+            return JSONResponseBuilder.build_response(
+                data={
+                    "output" : predictions
+                }
+            ), 200
+        else:
+            raise NotImplementedError()
     else:
         return JSONResponseBuilder.build_response(
                 success=False,
