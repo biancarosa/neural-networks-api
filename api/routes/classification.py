@@ -1,6 +1,7 @@
 import json
 from sklearn.neural_network import MLPClassifier
 from api import app
+from api.helpers.response_builder import JSONResponseBuilder
 
 @app.route('/classification')
 def classification():
@@ -10,8 +11,4 @@ def classification():
             hidden_layer_sizes=(5, 3), random_state=1)
     clf.fit(X, y)
     predictions = clf.predict([[2., 2., 3.], [-1., -2., -2.]])
-    response = { 'data' : [], 'success': False }
-    response['data'] = predictions.tolist()
-    response['success'] = True
-    data = json.dumps(response, indent=2)
-    return data
+    return JSONResponseBuilder.build_response(data=predictions.tolist())
