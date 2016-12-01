@@ -11,15 +11,20 @@ def classification():
         if not post_data.get('network_id'):
             classifier_network = ClassifierNetwork()
             classifier_network.create()
-            classifier_network.save()
-            predictions = classifier_network.predict(post_data['entries'])
-            return JSONResponseBuilder.build_response(
-                data={
-                    "output" : predictions
-                }
-            ), 200
         else:
-            raise NotImplementedError()
+            classifier_network = ClassifierNetwork.get(post_data['network_id'])
+            if classifier_network is None:
+                return JSONResponseBuilder.build_response(
+                    success=False,
+                    messages=['Network not found']
+                ), 404
+        predictions = classifier_network.predict(post_data['entries'])
+        classifier_network.save()
+        return JSONResponseBuilder.build_response(
+            data={
+                "output" : predictions
+            }
+        ), 200
     else:
         return JSONResponseBuilder.build_response(
                 success=False,

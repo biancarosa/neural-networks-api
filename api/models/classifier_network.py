@@ -15,6 +15,13 @@ class ClassifierNetwork(db.Document):
         self.clf.fit(self.X, self.y)
         self.pickled = pickle.dumps(self.clf)
 
+    @staticmethod
+    def get(network_id):
+        classifier_network = ClassifierNetwork.objects(id=network_id).first()
+        classifier_network.clf = pickle.loads(classifier_network.pickled)
+        return classifier_network
+
     def predict(self, entries):
         predictions = self.clf.predict(entries)
+        self.pickled = pickle.dumps(self.clf)
         return predictions.tolist()
