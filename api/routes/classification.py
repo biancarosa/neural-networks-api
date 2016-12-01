@@ -1,14 +1,6 @@
 import json
-
-from flask import Flask
-
 from sklearn.neural_network import MLPClassifier
-
-app = Flask(__name__)
-
-@app.route('/')
-def hello_world():
-    return 'Hello, World!'
+from api import app
 
 @app.route('/classification')
 def classification():
